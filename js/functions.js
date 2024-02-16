@@ -29,6 +29,7 @@ isPalindrome('ДовОд'); // true
 isPalindrome('Кекс'); // false
 isPalindrome('Лёша на полке клопа нашёл '); // true
 
+// Дополнительное задание
 
 function getNumber(string) {
   let number = parseInt(string.replace(/[^\d]/g, ''));
