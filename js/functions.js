@@ -28,3 +28,15 @@ isPalindrome('топот'); // true
 isPalindrome('ДовОд'); // true
 isPalindrome('Кекс'); // false
 isPalindrome('Лёша на полке клопа нашёл '); // true
+
+
+function getNumber(string) {
+  let number = parseInt(string.replace(/[^\d]/g, ''));
+  return number;
+}
+
+getNumber('2023 год'); // 2023
+getNumber('ECMAScript 2022'); // 2022
+getNumber('1 кефир, 0.5 батона'); // 105
+getNumber('агент 007'); // 7
+getNumber('а я томат'); // NaN
