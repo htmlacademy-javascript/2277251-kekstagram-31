@@ -4,9 +4,27 @@ function getStringLength (string, maxLength) {
   return string.length <= maxLength;
 }
 
-// Строка короче 20 символов
 getStringLength('проверяемая строка', 20); // true
-// Длина строки ровно 18 символов
 getStringLength('проверяемая строка', 18); // true
-// Строка длиннее 10 символов
 getStringLength('проверяемая строка', 10); // false
+
+// Функция для проверки, является ли строка палиндромом.
+
+/* function isPalindrome (string) {
+  const normalizedString = string.replaceAll(/\s/g,'').toLowerCase();
+  let emptyString = '';
+  for (let i = normalizedString.length - 1; i >= 0; i--) {
+
+  }
+} */
+
+function isPalindrome (string) {
+  string = string.replaceAll(/\s/g,'').toLowerCase();
+
+  return string === string.split('').reverse().join('');
+}
+
+isPalindrome('топот'); // true
+isPalindrome('ДовОд'); // true
+isPalindrome('Кекс'); // false
+isPalindrome('Лёша на полке клопа нашёл '); // true
