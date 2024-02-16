@@ -32,7 +32,7 @@ isPalindrome('Лёша на полке клопа нашёл '); // true
 // Дополнительное задание
 
 function getNumber(string) {
-  let number = parseInt(string.replace(/[^\d]/g, ''));
+  const number = parseInt(string.replace(/[^\d]/g, ''), 10);
   return number;
 }
 
