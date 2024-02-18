@@ -29,8 +29,9 @@ isPalindrome('Кекс'); // false
 isPalindrome('Лёша на полке клопа нашёл '); // true
 
 // Дополнительное задание - Функция принимающая строку и возвращающая целое число.
-// 1 вариант, недоработанный (не работает с цифрами в конце строки)
-function getNumber (string) {
+// 1 вариант, не рабочий.
+
+/* function getNumber (string) {
   for (let i = 0; i <= 9; i++) {
     if (string.includes(i)) {
       const number = parseInt(string, 10);
@@ -38,16 +39,10 @@ function getNumber (string) {
     }
     return NaN; // если в строке нет цифр от 0 до 9, то возвращаем NaN.
   }
-}
-
-getNumber('2023 год'); // 2023
-getNumber('ECMAScript 2022'); // 2022
-getNumber('1 кефир, 0.5 батона'); // 105
-getNumber('агент 007'); // 7
-getNumber('а я томат'); // NaN
+} */
 
 // 2 вариант функции дополнительного задания - рабочий. (не предусмотрено, если вместо строки приходит число).
-/* function getNumber(string) {
+function getNumber(string) {
   const number = parseInt(string.replace(/[^\d]/g, ''), 10);
   return number;
 }
@@ -56,4 +51,4 @@ getNumber('2023 год'); // 2023
 getNumber('ECMAScript 2022'); // 2022
 getNumber('1 кефир, 0.5 батона'); // 105
 getNumber('агент 007'); // 7
-getNumber('а я томат'); // NaN */
+getNumber('а я томат'); // NaN
