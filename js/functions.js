@@ -17,8 +17,8 @@ function isPalindrome (string) {
   return reverseString === normalizedString;
 }
 
-/* // 2 вариант функции с палиндромом.
-function isPalindrome (string) {
+// 2 вариант функции с палиндромом.
+/* function isPalindrome (string) {
   string = string.replaceAll(/\s/g,'').toLowerCase();
   return string === string.split('').reverse().join('');
 } */
@@ -29,26 +29,27 @@ isPalindrome('Кекс'); // false
 isPalindrome('Лёша на полке клопа нашёл '); // true
 
 // Дополнительное задание - Функция принимающая строку и возвращающая целое число.
-// 1 вариант, не рабочий.
-
-/* function getNumber (string) {
-  for (let i = 0; i <= 9; i++) {
-    if (string.includes(i)) {
-      const number = parseInt(string, 10);
-      return number;
+// 1 вариант.
+const getNumber = (string) => {
+  let number = '';
+  string = string.toString();
+  for (let i = 0; i < string.length; i++) {
+    const item = parseInt(string[i], 10);
+    if (!Number.isNaN(item)) {
+      number += item.toString();
     }
-    return NaN; // если в строке нет цифр от 0 до 9, то возвращаем NaN.
   }
-} */
+  return parseInt(number, 10);
+};
 
-// 2 вариант функции дополнительного задания - рабочий.
-function getNumber(string) {
+// 2 вариант.
+/* function getNumber(string) {
   const number = parseInt(string.toString().replace(/[^\d]/g, ''), 10);
   return number;
-}
+} */
 
-getNumber('2023 год'); // 2023
-getNumber('ECMAScript 2022'); // 2022
-getNumber('1 кефир, 0.5 батона'); // 105
-getNumber('агент 007'); // 7
-getNumber('а я томат'); // NaN
+console.log(getNumber('2023 год')); // 2023
+console.log(getNumber('ECMAScript 2022')); // 2022
+console.log(getNumber('1 кефир, 0.5 батона')); // 105
+console.log(getNumber('агент 007')); // 7
+console.log(getNumber('а я томат')); // NaN
