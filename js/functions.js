@@ -41,9 +41,9 @@ isPalindrome('Лёша на полке клопа нашёл '); // true
   }
 } */
 
-// 2 вариант функции дополнительного задания - рабочий. (не предусмотрено, если вместо строки приходит число).
+// 2 вариант функции дополнительного задания - рабочий.
 function getNumber(string) {
-  const number = parseInt(string.replace(/[^\d]/g, ''), 10);
+  const number = parseInt(string.toString().replace(/[^\d]/g, ''), 10);
   return number;
 }
 
