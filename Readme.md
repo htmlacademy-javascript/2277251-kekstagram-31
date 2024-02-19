@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Georgij Tsabiev](https://up.htmlacademy.ru/javascript/31/user/2277251).
-* Наставник: [Станислав Михайлов](https://htmlacademy.ru/profile/id139638).
+* Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
 ---
 
