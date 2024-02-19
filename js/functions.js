@@ -34,9 +34,9 @@ const getNumber = (string) => {
   let number = '';
   string = string.toString();
   for (let i = 0; i < string.length; i++) {
-    const item = parseInt(string[i], 10);
-    if (!Number.isNaN(item)) {
-      number += item.toString();
+    const currentChar = parseInt(string[i], 10);
+    if (!Number.isNaN(currentChar)) {
+      number += currentChar.toString();
     }
   }
   return parseInt(number, 10);
