@@ -37,13 +37,32 @@ const generateComments = () => { // функция для генерации к�
   return comments;
 };
 
-const generatePhoto = () => ({ // функция для генерации объекта с описанием фото
-  id: getRandomInteger(1, 25),
-  url: `photos/${getRandomInteger(1, 25)}.jpg`,
-  description: 'Описание фото',
-  likes: getRandomInteger(15, 200),
-  comments: generateComments()
-});
+const uniquePhotoIds = [];
+const uniquePhotoUrls = [];
+
+const generatePhoto = () => { // функция для генерации объекта с описанием фото
+  let id;
+  let url;
+  do { // циклы для генерации уникальных id и url фото.
+    id = getRandomInteger(1, 25);
+  } while (
+    uniquePhotoIds.includes(id) // если id фото уже есть в массиве uniquePhotoIds, то генерируем новый id до тех пор, пока он не будет уникальным.
+  );
+  uniquePhotoIds.push(id);
+  do {
+    url = `photos/${getRandomInteger(1, 25)}.jpg`;
+  } while (
+    uniquePhotoUrls.includes(url)
+  );
+  uniquePhotoUrls.push(url);
+  return {
+    id,
+    url,
+    description: 'Описание фото',
+    likes: getRandomInteger(15, 200),
+    comments: generateComments()
+  };
+};
 
 const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для генерации.
 const generatedPhotos = []; // массив для хранения сгенерированных фото.
