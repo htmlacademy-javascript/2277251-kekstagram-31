@@ -30,8 +30,8 @@ const generateComments = () => { // функция для генерации к�
     comments.push({ // запись комментариев в массив comments.
       id,
       avatar,
-      name,
-      message
+      message,
+      name
     });
   }
   return comments;
