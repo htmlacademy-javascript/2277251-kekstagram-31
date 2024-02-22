@@ -35,3 +35,15 @@ function getRandomMessage() { // функция для генерации тек
   ];
   return messages[getRandomInteger(0, messages.length - 1)];
 }
+
+function generatePhoto () { // функция для генерации объекта с описанием фото
+  return {
+    id: getRandomInteger(1, 25),
+    url: `photos/${getRandomInteger(1, 25)}.jpg`,
+    description: 'Описание фото',
+    likes: getRandomInteger(15, 200),
+    comments: generateComments()
+  };
+}
+
+generatePhoto();
