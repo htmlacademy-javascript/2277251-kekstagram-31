@@ -4,3 +4,4 @@ const getRandomInteger = (a, b) => { // функция для генерации
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
+const commentAuthors = ['Пётр', 'Иван', 'Илья', 'Анна', 'Алиса', 'Николай'];
