@@ -50,5 +50,5 @@ const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для ге�
 const generatedPhotos = []; // массив для хранения сгенерированных фото.
 
 for (let i = 0; i < NUM_PHOTOS_TO_GENERATE; i++) {
-  generatedPhotos.push(generatePhoto()); // запись сгенерированных фото в массив similarPhotos.
+  generatedPhotos.push(generatePhoto()); // запись сгенерированных фото в массив generatedPhotos.
 }
