@@ -46,4 +46,9 @@ function generatePhoto () { // функция для генерации объе
   };
 }
 
-generatePhoto();
+const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для генерации.
+const generatedPhotos = []; // массив для хранения сгенерированных фото.
+
+for (let i = 0; i < NUM_PHOTOS_TO_GENERATE; i++) {
+  generatedPhotos.push(generatePhoto()); // запись сгенерированных фото в массив similarPhotos.
+}
