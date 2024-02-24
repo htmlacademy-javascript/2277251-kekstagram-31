@@ -65,8 +65,6 @@ const generatePhoto = () => { // функция для генерации объ
 };
 
 const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для генерации.
-const generatedPhotos = []; // массив для хранения сгенерированных фото.
+const createPhotos = Array.from({length: NUM_PHOTOS_TO_GENERATE}, generatePhoto);
 
-for (let i = 0; i < NUM_PHOTOS_TO_GENERATE; i++) {
-  generatedPhotos.push(generatePhoto()); // запись сгенерированных фото в массив generatedPhotos.
-}
+console.log(createPhotos);
