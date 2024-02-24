@@ -1,5 +1,5 @@
 // Функция для проверки длины строки.
-function getStringLength (string, maxLength) {
+function getStringLength(string, maxLength) {
   return string.length <= maxLength;
 }
 
@@ -8,7 +8,7 @@ getStringLength('проверяемая строка', 18); // true
 getStringLength('проверяемая строка', 10); // false
 
 // Функция для проверки, является ли строка палиндромом.
-function isPalindrome (string) {
+function isPalindrome(string) {
   const normalizedString = string.replaceAll(/\s/g,'').toLowerCase();
   let reverseString = '';
   for (let i = normalizedString.length - 1; i >= 0; i--) {
@@ -18,7 +18,7 @@ function isPalindrome (string) {
 }
 
 // 2 вариант функции с палиндромом.
-/* function isPalindrome (string) {
+/* function isPalindrome(string) {
   string = string.replaceAll(/\s/g,'').toLowerCase();
   return string === string.split('').reverse().join('');
 } */
@@ -34,9 +34,9 @@ const getNumber = (string) => {
   let number = '';
   string = string.toString();
   for (let i = 0; i < string.length; i++) {
-    const item = parseInt(string[i], 10);
-    if (!Number.isNaN(item)) {
-      number += item.toString();
+    const currentChar = parseInt(string[i], 10);
+    if (!Number.isNaN(currentChar)) {
+      number += currentChar.toString();
     }
   }
   return parseInt(number, 10);
