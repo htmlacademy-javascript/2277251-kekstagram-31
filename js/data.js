@@ -61,3 +61,5 @@ const generatePhoto = () => { // функция для генерации объ
 
 const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для генерации.
 const createPhotos = () => Array.from({length: NUM_PHOTOS_TO_GENERATE}, generatePhoto);
+
+export {createPhotos};
