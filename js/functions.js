@@ -2,7 +2,6 @@
 function getStringLength(string, maxLength) {
   return string.length <= maxLength;
 }
-
 getStringLength('проверяемая строка', 20); // true
 getStringLength('проверяемая строка', 18); // true
 getStringLength('проверяемая строка', 10); // false
@@ -12,7 +11,6 @@ function isPalindrome(string) {
   string = string.replaceAll(/\s/g,'').toLowerCase();
   return string === string.split('').reverse().join('');
 }
-
 isPalindrome('топот'); // true
 isPalindrome('ДовОд'); // true
 isPalindrome('Кекс'); // false
@@ -23,7 +21,6 @@ function getNumber(string) {
   const number = parseInt(string.toString().replace(/[^\d]/g, ''), 10);
   return number;
 }
-
 getNumber('2023 год'); // 2023
 getNumber('ECMAScript 2022'); // 2022
 getNumber('1 кефир, 0.5 батона'); // 105
