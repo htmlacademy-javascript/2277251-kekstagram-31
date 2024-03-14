@@ -12,6 +12,22 @@ const getRandomMessage = () => { // функция для генерации т�
   return messages[getRandomInteger(0, messages.length - 1)];
 };
 
+const getRandomDescription = () => { // функция для генерации текста описаний фотографий
+  const descriptions = [
+    'Красивый бухта',
+    'На пляже',
+    'В парке',
+    'С друзьями',
+    'Поход',
+    'Место отдыха',
+    'Вечеринка в честь дня рождения',
+    'Планы на выходные',
+    'На завтраке',
+    'Ночное небо'
+  ];
+  return descriptions[getRandomInteger(0, descriptions.length - 1)];
+};
+
 const commentAuthors = ['Пётр', 'Иван', 'Илья', 'Анна', 'Алиса', 'Николай'];
 
 const generateComments = () => { // функция для генерации комментариев
@@ -45,7 +61,7 @@ const generatePhoto = () => {
   return {
     id,
     url,
-    description: 'Описание фото',
+    description: getRandomDescription(),
     likes: getRandomInteger(15, 200),
     comments: generateComments()
   };
