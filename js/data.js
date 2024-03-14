@@ -34,22 +34,14 @@ const generateComments = () => { // функция для генерации к�
 
 const uniquePhotoIds = [];
 const uniquePhotoUrls = [];
+let nextId = 1; // Инициализируем переменную для отслеживания следующего id фотографии
 
-const generatePhoto = () => { // функция для генерации объекта с описанием фото
-  let id;
-  let url;
-  do { // циклы для генерации уникальных id и url фото.
-    id = getRandomInteger(1, 25);
-  } while (
-    uniquePhotoIds.includes(id) // если id фото уже есть в массиве uniquePhotoIds, то генерируем новый id до тех пор, пока он не будет уникальным.
-  );
+const generatePhoto = () => {
+  const id = nextId;
+  const url = `photos/${nextId}.jpg`;
   uniquePhotoIds.push(id);
-  do {
-    url = `photos/${getRandomInteger(1, 25)}.jpg`;
-  } while (
-    uniquePhotoUrls.includes(url)
-  );
   uniquePhotoUrls.push(url);
+  nextId++; // Увеличиваем nextId, чтобы получить следующий порядковый номер id фотографии;
   return {
     id,
     url,
