@@ -1,4 +1,4 @@
-const getRandomInteger = (a, b) => { // функция для генерации случайного числа от min до max.
+const getRandomInteger = (a, b) => { // Функция для генерации случайного числа от min до max
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
   const result = Math.random() * (upper - lower + 1) + lower;

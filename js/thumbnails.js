@@ -1,4 +1,4 @@
-const renderThumbnails = (images) => { // Функция, отвечающая за отображение фотографий других пользователей.
+const renderThumbnails = (images) => { // Функция, отвечающая за отображение фотографий других пользователей
   const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const thumbnailContainer = document.querySelector('.pictures');
   const thumbnailFragment = document.createDocumentFragment();
