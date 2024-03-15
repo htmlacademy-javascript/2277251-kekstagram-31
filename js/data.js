@@ -35,7 +35,7 @@ const generateComments = () => { // функция для генерации к�
   const comments = [];
   for (let i = 0; i < numComments; i++) { // цикл для генерации комментариев и записи их в массив comments.
     const id = i;
-    const avatar = `img/avatar-${getRandomInteger(1,6)}.svg`;
+    const avatar = `img/avatar-${getRandomInteger(1, 6)}.svg`;
     const name = commentAuthors[getRandomInteger(0, commentAuthors.length - 1)];
     const message = getRandomMessage();
     comments.push({ // запись комментариев в массив comments.
@@ -48,16 +48,20 @@ const generateComments = () => { // функция для генерации к�
   return comments;
 };
 
+const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для генерации.
 const uniquePhotoIds = [];
 const uniquePhotoUrls = [];
-let nextId = 1; // Инициализируем переменную для отслеживания следующего id фотографии
 
 const generatePhoto = () => {
-  const id = nextId;
-  const url = `photos/${nextId}.jpg`;
+  let id;
+  do { // id обновляется на каждой итерации, в конечном итоге он будет уникальным и выйдет из цикла
+    id = Math.floor(Math.random() * NUM_PHOTOS_TO_GENERATE) + 1; // генерируем случайный id от 1 до максимального значения
+  } while (
+    uniquePhotoIds.includes(id)
+  );
+  const url = `photos/${id}.jpg`;
   uniquePhotoIds.push(id);
   uniquePhotoUrls.push(url);
-  nextId++; // Увеличиваем nextId, чтобы получить следующий порядковый номер id фотографии;
   return {
     id,
     url,
@@ -67,7 +71,6 @@ const generatePhoto = () => {
   };
 };
 
-const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для генерации.
 const createPhotos = () => Array.from({length: NUM_PHOTOS_TO_GENERATE}, generatePhoto);
 
 export {createPhotos};
