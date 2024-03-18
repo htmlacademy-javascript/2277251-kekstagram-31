@@ -1,6 +1,6 @@
 import {getRandomInteger} from './util.js';
 
-const getRandomMessage = () => { // функция для генерации текста комментария
+const getRandomMessage = () => { // Функция для генерации текста комментария
   const messages = [
     'Всё отлично!',
     'В целом всё неплохо. Но не всё.',
@@ -12,17 +12,33 @@ const getRandomMessage = () => { // функция для генерации т�
   return messages[getRandomInteger(0, messages.length - 1)];
 };
 
+const getRandomDescription = () => { // Функция для генерации текста описаний фотографий
+  const descriptions = [
+    'Красивая бухта',
+    'На пляже',
+    'В парке',
+    'С друзьями',
+    'Поход',
+    'Место отдыха',
+    'Вечеринка в честь дня рождения',
+    'Планы на выходные',
+    'На завтраке',
+    'Ночное небо'
+  ];
+  return descriptions[getRandomInteger(0, descriptions.length - 1)];
+};
+
 const commentAuthors = ['Пётр', 'Иван', 'Илья', 'Анна', 'Алиса', 'Николай'];
 
-const generateComments = () => { // функция для генерации комментариев
+const generateComments = () => { // Функция для генерации комментариев
   const numComments = getRandomInteger(0, 30);
   const comments = [];
-  for (let i = 0; i < numComments; i++) { // цикл для генерации комментариев и записи их в массив comments.
+  for (let i = 0; i < numComments; i++) { // Цикл для генерации комментариев и записи их в массив comments
     const id = i;
-    const avatar = `img/avatar-${getRandomInteger(1,6)}.svg`;
+    const avatar = `img/avatar-${getRandomInteger(1, 6)}.svg`;
     const name = commentAuthors[getRandomInteger(0, commentAuthors.length - 1)];
     const message = getRandomMessage();
-    comments.push({ // запись комментариев в массив comments.
+    comments.push({ // Запись комментариев в массив comments
       id,
       avatar,
       message,
@@ -32,34 +48,29 @@ const generateComments = () => { // функция для генерации к�
   return comments;
 };
 
+const NUM_PHOTOS_TO_GENERATE = 25; // Количество фото для генерации
 const uniquePhotoIds = [];
 const uniquePhotoUrls = [];
 
-const generatePhoto = () => { // функция для генерации объекта с описанием фото
+const generatePhoto = () => {
   let id;
-  let url;
-  do { // циклы для генерации уникальных id и url фото.
-    id = getRandomInteger(1, 25);
+  do { // Id обновляется на каждой итерации, в конечном итоге он будет уникальным и выйдет из цикла
+    id = Math.floor(Math.random() * NUM_PHOTOS_TO_GENERATE) + 1; // Генерируем случайный id от 1 до максимального значения
   } while (
-    uniquePhotoIds.includes(id) // если id фото уже есть в массиве uniquePhotoIds, то генерируем новый id до тех пор, пока он не будет уникальным.
+    uniquePhotoIds.includes(id)
   );
+  const url = `photos/${id}.jpg`;
   uniquePhotoIds.push(id);
-  do {
-    url = `photos/${getRandomInteger(1, 25)}.jpg`;
-  } while (
-    uniquePhotoUrls.includes(url)
-  );
   uniquePhotoUrls.push(url);
   return {
     id,
     url,
-    description: 'Описание фото',
+    description: getRandomDescription(),
     likes: getRandomInteger(15, 200),
     comments: generateComments()
   };
 };
 
-const NUM_PHOTOS_TO_GENERATE = 25; // количество фото для генерации.
 const createPhotos = () => Array.from({length: NUM_PHOTOS_TO_GENERATE}, generatePhoto);
 
 export {createPhotos};
