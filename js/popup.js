@@ -1,4 +1,4 @@
-import {isEscapePressed} from './util.js';
+import {isEscapeKey} from './util.js';
 
 const bigImage = document.querySelector('.big-picture');
 const commentCount = document.querySelector('.social__comment-count');
@@ -27,7 +27,7 @@ const displayPopupImage = ({url, description, likes, comments}) => { // Функ
   addCommentsToList(comments);
 };
 const checkForEscapeClose = (event) => { // Функция для проверки нажатия клавиши Escape
-  if (isEscapePressed(event)) {
+  if (isEscapeKey(event)) {
     event.preventDefault();
     closePopup();
   }
