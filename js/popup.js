@@ -1,12 +1,11 @@
 import {isEscapePressed} from './util.js';
 
-const popupElement = document.querySelector('.big-picture');
-const commentCount = document.querySelector('.social__comment-count');
-const commentLoader = document.querySelector('.comments-loader');
 const bigImage = document.querySelector('.big-picture');
-const closeButton = document.querySelector('.big-picture__cancel');
+const commentCount = document.querySelector('.social__comment-count');
 const commentsList = bigImage.querySelector('.social__comments');
 const commentItem = bigImage.querySelector('.social__comment');
+const commentLoader = document.querySelector('.comments-loader');
+const closeButton = document.querySelector('.big-picture__cancel');
 const addCommentsToList = (imageComments) => { // Функция добавления комментариев в список
   commentsList.innerHTML = '';
   imageComments.forEach(({avatar, name, message}) => {
@@ -34,7 +33,7 @@ const checkForEscapeClose = (event) => { // Функция для проверк
   }
 };
 function closePopup () { // Функция закрытия попапа (function declaration для hoisting)
-  popupElement.classList.add('hidden');
+  bigImage.classList.add('hidden');
   commentCount.classList.remove('hidden');
   commentLoader.classList.remove('hidden');
   document.removeEventListener('keydown', checkForEscapeClose);
@@ -45,7 +44,7 @@ closeButton.addEventListener('click', (event) => {
 });
 const openPopup = (photo) => { // Функция открытия попапа
   displayPopupImage(photo);
-  popupElement.classList.remove('hidden');
+  bigImage.classList.remove('hidden');
   commentCount.classList.add('hidden');
   commentLoader.classList.add('hidden');
   document.addEventListener('keydown', checkForEscapeClose);
