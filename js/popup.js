@@ -1,4 +1,4 @@
-import {isEscapeKey} from './util.js';
+import {onEscapeEvent} from './util.js';
 
 const bigImage = document.querySelector('.big-picture');
 const commentCount = document.querySelector('.social__comment-count');
@@ -26,17 +26,11 @@ const displayPopupImage = ({url, description, likes, comments}) => { // Функ
   bigImage.querySelector('.social__comment-total-count').textContent = comments.length;
   addCommentsToList(comments);
 };
-const checkForEscapeClose = (event) => { // Функция для проверки нажатия клавиши Escape
-  if (isEscapeKey(event)) {
-    event.preventDefault();
-    closePopup();
-  }
-};
 function closePopup () { // Функция закрытия попапа (function declaration для hoisting)
   bigImage.classList.add('hidden');
   commentCount.classList.remove('hidden');
   commentLoader.classList.remove('hidden');
-  document.removeEventListener('keydown', checkForEscapeClose);
+  document.removeEventListener('keydown', onEscapeEvent);
 }
 closeButton.addEventListener('click', (event) => {
   event.preventDefault();
@@ -47,7 +41,7 @@ const openPopup = (photo) => { // Функция открытия попапа
   bigImage.classList.remove('hidden');
   commentCount.classList.add('hidden');
   commentLoader.classList.add('hidden');
-  document.addEventListener('keydown', checkForEscapeClose);
+  document.addEventListener('keydown', onEscapeEvent);
 };
 
-export {openPopup};
+export {openPopup, closePopup};
