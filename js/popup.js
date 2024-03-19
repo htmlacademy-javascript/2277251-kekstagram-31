@@ -1,4 +1,4 @@
-import {isEscapePressed} from "./util.js";
+import {isEscapePressed} from './util.js';
 
 const popupElement = document.querySelector('.big-picture');
 const commentCount = document.querySelector('.social__comment-count');
@@ -33,7 +33,7 @@ const checkForEscapeClose = (event) => { // Функция для проверк
     closePopup();
   }
 };
-const closePopup = () => { // Функция закрытия попапа
+function closePopup () { // Функция закрытия попапа (function declaration для hoisting)
   popupElement.classList.add('hidden');
   commentCount.classList.remove('hidden');
   commentLoader.classList.remove('hidden');
