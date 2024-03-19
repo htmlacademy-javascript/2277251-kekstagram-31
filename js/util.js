@@ -5,4 +5,6 @@ const getRandomInteger = (a, b) => { // Функция для генерации
   return Math.floor(result);
 };
 
-export {getRandomInteger};
+const isEscapePressed = (event) => event.key === 'Escape';
+
+export {getRandomInteger, isEscapePressed};
