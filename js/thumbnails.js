@@ -1,9 +1,15 @@
+import {openPopup} from './popup.js';
+
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const thumbnailContainer = document.querySelector('.pictures');
 const renderThumbnails = (images) => { // Функция, отвечающая за отображение фотографий других пользователей
   const thumbnailFragment = document.createDocumentFragment();
   images.forEach(({url, description, likes, comments}) => { // Перебираем изображения
     const thumbnail = thumbnailTemplate.cloneNode(true); // Клонируем шаблон и наполняем его
+    thumbnail.addEventListener('click', function (event) {
+      event.preventDefault();
+      openPopup({url, description, likes, comments});
+    })
     const thumbnailImage = thumbnail.querySelector('.picture__img');
     thumbnailImage.src = url;
     thumbnailImage.alt = description;
