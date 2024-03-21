@@ -26,9 +26,11 @@ const displayPopupImage = ({url, description, likes, comments}) => { // Функ
   bigImage.querySelector('.social__comment-total-count').textContent = comments.length;
   bigImage.querySelector('.social__comment-shown-count').textContent = comments.length;
   addComments(comments);
+  document.body.classList.add('modal-open');
 };
 function closePopup () { // Функция закрытия попапа (function declaration для hoisting)
   bigImage.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeEvent);
 }
 closeButton.addEventListener('click', (event) => {
