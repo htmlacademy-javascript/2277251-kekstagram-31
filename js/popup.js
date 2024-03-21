@@ -28,8 +28,6 @@ const displayPopupImage = ({url, description, likes, comments}) => { // Функ
 };
 function closePopup () { // Функция закрытия попапа (function declaration для hoisting)
   bigImage.classList.add('hidden');
-  commentCount.classList.remove('hidden');
-  commentLoader.classList.remove('hidden');
   document.removeEventListener('keydown', onEscapeEvent);
 }
 closeButton.addEventListener('click', (event) => {
@@ -39,8 +37,8 @@ closeButton.addEventListener('click', (event) => {
 const openPopup = (photo) => { // Функция открытия попапа
   displayPopupImage(photo);
   bigImage.classList.remove('hidden');
-  commentCount.classList.add('hidden');
-  commentLoader.classList.add('hidden');
+  commentCount.classList.remove('hidden');
+  commentLoader.classList.remove('hidden');
   document.addEventListener('keydown', onEscapeEvent);
 };
 
