@@ -17,6 +17,6 @@ const clearComments = () => {
   while (commentsList.firstChild) {
     commentsList.removeChild(commentsList.firstChild);
   }
-}
+};
 
 export {getRandomInteger, onEscapeEvent, clearComments};
