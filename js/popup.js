@@ -1,4 +1,4 @@
-import {onEscapeEvent} from './util.js';
+import {onEscapeEvent, clearComments} from './util.js';
 
 const bigImage = document.querySelector('.big-picture');
 const commentCount = document.querySelector('.social__comment-count');
@@ -7,7 +7,7 @@ const commentItem = bigImage.querySelector('.social__comment');
 const commentLoader = document.querySelector('.comments-loader');
 const closeButton = document.querySelector('.big-picture__cancel');
 const addCommentsToList = (imageComments) => { // Функция добавления комментариев в список
-  commentsList.innerHTML = '';
+  clearComments();
   imageComments.forEach(({avatar, name, message}) => {
     const newComment = commentItem.cloneNode(true);
     const image = newComment.querySelector('.social__picture');
@@ -44,4 +44,4 @@ const openPopup = (photo) => { // Функция открытия попапа
   document.addEventListener('keydown', onEscapeEvent);
 };
 
-export {openPopup, closePopup};
+export {openPopup, closePopup, commentsList};
