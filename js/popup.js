@@ -24,6 +24,7 @@ const displayPopupImage = ({url, description, likes, comments}) => { // Функ
   bigImage.querySelector('.social__caption').textContent = description;
   bigImage.querySelector('.likes-count').textContent = likes;
   bigImage.querySelector('.social__comment-total-count').textContent = comments.length;
+  bigImage.querySelector('.social__comment-shown-count').textContent = comments.length;
   addComments(comments);
 };
 function closePopup () { // Функция закрытия попапа (function declaration для hoisting)
