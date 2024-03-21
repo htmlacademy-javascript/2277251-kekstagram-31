@@ -1,7 +1,7 @@
 import {getRandomInteger} from './util.js';
 
 const getRandomMessage = () => { // Функция для генерации текста комментария
-  const messages = [
+  const MESSAGES = [
     'Всё отлично!',
     'В целом всё неплохо. Но не всё.',
     'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -9,11 +9,11 @@ const getRandomMessage = () => { // Функция для генерации т�
     'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
   ];
-  return messages[getRandomInteger(0, messages.length - 1)];
+  return MESSAGES[getRandomInteger(0, MESSAGES.length - 1)];
 };
 
 const getRandomDescription = () => { // Функция для генерации текста описаний фотографий
-  const descriptions = [
+  const DESCRIPTIONS = [
     'Красивая бухта',
     'На пляже',
     'В парке',
@@ -25,10 +25,10 @@ const getRandomDescription = () => { // Функция для генерации
     'На завтраке',
     'Ночное небо'
   ];
-  return descriptions[getRandomInteger(0, descriptions.length - 1)];
+  return DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)];
 };
 
-const commentAuthors = ['Пётр', 'Иван', 'Илья', 'Анна', 'Алиса', 'Николай'];
+const COMMENT_AUTHORS = ['Пётр', 'Иван', 'Илья', 'Анна', 'Алиса', 'Николай'];
 
 const generateComments = () => { // Функция для генерации комментариев
   const numComments = getRandomInteger(0, 30);
@@ -36,7 +36,7 @@ const generateComments = () => { // Функция для генерации к�
   for (let i = 0; i < numComments; i++) { // Цикл для генерации комментариев и записи их в массив comments
     const id = i;
     const avatar = `img/avatar-${getRandomInteger(1, 6)}.svg`;
-    const name = commentAuthors[getRandomInteger(0, commentAuthors.length - 1)];
+    const name = COMMENT_AUTHORS[getRandomInteger(0, COMMENT_AUTHORS.length - 1)];
     const message = getRandomMessage();
     comments.push({ // Запись комментариев в массив comments
       id,
