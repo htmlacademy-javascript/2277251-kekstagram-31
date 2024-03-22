@@ -19,4 +19,4 @@ const clearComments = () => {
   }
 };
 
-export {getRandomInteger, onEscapeEvent, clearComments};
+export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments};
