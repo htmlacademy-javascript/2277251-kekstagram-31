@@ -33,8 +33,8 @@ function closePopup () { // Функция закрытия попапа (functi
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeEvent);
 }
-closeButton.addEventListener('click', (event) => {
-  event.preventDefault();
+closeButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   closePopup();
 });
 const openPopup = (photo) => { // Функция открытия попапа

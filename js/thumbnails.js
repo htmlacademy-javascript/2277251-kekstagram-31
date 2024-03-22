@@ -6,8 +6,8 @@ const renderThumbnails = (images) => { // Функция, отвечающая �
   const thumbnailFragment = document.createDocumentFragment();
   images.forEach(({url, description, likes, comments}) => { // Перебираем изображения
     const thumbnail = thumbnailTemplate.cloneNode(true); // Клонируем шаблон и наполняем его
-    thumbnail.addEventListener('click', (event) => {
-      event.preventDefault();
+    thumbnail.addEventListener('click', (evt) => {
+      evt.preventDefault();
       openPopup({url, description, likes, comments});
     });
     const thumbnailImage = thumbnail.querySelector('.picture__img');
