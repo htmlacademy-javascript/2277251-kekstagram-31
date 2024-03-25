@@ -1,5 +1,7 @@
 import {isEscapeKey} from './util.js';
 import {resetScale} from './image-scale';
+import {updateScale} from './image-scale.js';
+import {setupEffects} from './image-effects.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const fileInput = document.querySelector('.img-upload__input');
@@ -29,6 +31,8 @@ const displayUploadForm = () => { // Функция для отображени�
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   resetScale();
+  updateScale(1);
+  setupEffects();
   document.addEventListener('keydown', onEscapeEvent);
 };
 const validateHashtag = (hashtag) => { // Функция настроек валидации хэштега
