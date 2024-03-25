@@ -1,4 +1,5 @@
 import {isEscapeKey} from './util.js';
+import {resetScale} from './image-scale';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const fileInput = document.querySelector('.img-upload__input');
@@ -27,6 +28,7 @@ const onEscapeEvent = (evt) => { // Функция для закрытия фо�
 const displayUploadForm = () => { // Функция для отображения формы загрузки
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  resetScale();
   document.addEventListener('keydown', onEscapeEvent);
 };
 const validateHashtag = (hashtag) => { // Функция настроек валидации хэштега
@@ -82,4 +84,4 @@ const configureFormValidation = () => { // // Функция конфигура�
   pristine.addValidator(descriptionInput, validateComment, 'Длина комментария не может составлять больше 140 символов.');
 };
 
-export {fileInput, configureFormValidation};
+export {configureFormValidation};
