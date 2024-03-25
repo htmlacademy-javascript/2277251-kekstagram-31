@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import {updateScale, resetScale} from './image-scale.js';
+import {setupEffects} from './image-effects.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const fileInput = document.querySelector('.img-upload__input');
@@ -27,6 +29,9 @@ const onEscapeEvent = (evt) => { // Функция для закрытия фо�
 const displayUploadForm = () => { // Функция для отображения формы загрузки
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  resetScale();
+  updateScale(1);
+  setupEffects();
   document.addEventListener('keydown', onEscapeEvent);
 };
 const validateHashtag = (hashtag) => { // Функция настроек валидации хэштега
@@ -64,7 +69,7 @@ function hideUploadForm() { // Функция скрытия формы загр
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeEvent);
 }
-const configureFormValidation = () => { // // Функция конфигурации проверки формы
+const configureFormValidation = () => { // Функция конфигурации проверки формы
   uploadForm.addEventListener('submit', submitForm);
   closeButton.addEventListener('click', hideUploadForm);
   descriptionInput.addEventListener('keydown', (evt) => {
