@@ -45,7 +45,7 @@ const setImageStyle = (effect) => { // Применяем эффект к изо
       step,
       connect: 'lower'
     });
-    effectSlider.noUiSlider.on('update', () => { // Применяем фильтр при имзенении эффекта
+    effectSlider.noUiSlider.on('update', () => { // Применяем фильтр при изменении эффекта
       uploadedImage.style.filter = `${filter}(${effectValue.value}${effect === 'phobos' ? 'px' : ''})`;
     });
   }
