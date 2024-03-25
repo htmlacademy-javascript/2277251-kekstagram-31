@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {resetScale} from './image-scale';
+import {resetScale} from './image-scale.js';
 import {updateScale} from './image-scale.js';
 import {setupEffects} from './image-effects.js';
 
