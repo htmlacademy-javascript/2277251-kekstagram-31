@@ -6,10 +6,10 @@ const getRandomInteger = (a, b) => { // Функция для генерации
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
-const isEscapeKey = (event) => event.key === 'Escape'; // Функция для проверки, нажата ли клавиша Escape
-const onEscapeEvent = (event) => {
-  if (isEscapeKey(event)) {
-    event.preventDefault();
+const isEscapeKey = (evt) => evt.key === 'Escape'; // Функция для проверки, нажата ли клавиша Escape
+const onEscapeEvent = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
     closePopup();
   }
 };
@@ -19,4 +19,4 @@ const clearComments = () => {
   }
 };
 
-export {getRandomInteger, onEscapeEvent, clearComments};
+export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments};
