@@ -70,7 +70,7 @@ function hideUploadForm() { // Функция скрытия формы загр
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeEvent);
 }
-const configureFormValidation = () => { // // Функция конфигурации проверки формы
+const configureFormValidation = () => { // Функция конфигурации проверки формы
   uploadForm.addEventListener('submit', submitForm);
   closeButton.addEventListener('click', hideUploadForm);
   descriptionInput.addEventListener('keydown', (evt) => {
