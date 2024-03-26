@@ -51,17 +51,17 @@ const areHashtagsUnique = (hashtags) => { // Функция для провер�
   return true;
 };
 const areHashtagsValid = (hashtagsString) => { // Функция для проверки хэштегов на валидность
-  const maxHashtags = 5;
+  const MAX_HASHTAGS = 5;
   const trimmed = hashtagsString.trim();
   if (!trimmed) {
     return true;
   }
   const hashtags = trimmed.split(' ');
   const validHashtags = hashtags.every((hashtag) => validateHashtag(hashtag));
-  return validHashtags && hashtags.length <= maxHashtags && areHashtagsUnique(hashtags);
+  return validHashtags && hashtags.length <= MAX_HASHTAGS && areHashtagsUnique(hashtags);
 };
-const maxCommentLength = 140;
-const validateComment = (comment) => comment.length <= maxCommentLength; // Функция настроек валидации комментария
+const MAX_COMMENT_LENGTH = 140;
+const validateComment = (comment) => comment.length <= MAX_COMMENT_LENGTH; // Функция настроек валидации комментария
 function hideUploadForm() { // Функция скрытия формы загрузки
   pristine.reset();
   uploadForm.reset();
