@@ -13,7 +13,7 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
 });
-const submitForm = (evt) => { // Функция для отправки формы
+const onSubmitForm = (evt) => { // Функция для отправки формы
   evt.preventDefault();
   if (pristine.validate()) {
     uploadForm.submit();
@@ -69,7 +69,7 @@ function hideUploadForm() { // Функция скрытия формы загр
   document.removeEventListener('keydown', onEscapeEvent);
 }
 const configureFormValidation = () => { // Функция конфигурации проверки формы
-  uploadForm.addEventListener('submit', submitForm);
+  uploadForm.addEventListener('submit', onSubmitForm);
   closeButton.addEventListener('click', hideUploadForm);
   descriptionInput.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
