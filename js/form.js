@@ -39,10 +39,9 @@ const validateHashtag = (hashtag) => { // Функция настроек вал
   return regex.test(hashtag);
 };
 const areHashtagsUnique = (hashtags) => { // Функция для проверки уникальности хэштегов
-  const lowerHashtags = hashtags.map((hashtag) => hashtag.toLowerCase());
   const seenHashtag = new Set();
-  for (let i = 0; i < lowerHashtags.length; i++) {
-    const currentHashtag = lowerHashtags[i];
+  for (let i = 0; i < hashtags.length; i++) {
+    const currentHashtag = hashtags[i].toLowerCase();
     if (seenHashtag.has(currentHashtag)) {
       return false;
     }
