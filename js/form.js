@@ -34,11 +34,11 @@ const showUploadFormHandler = () => { // Функция для отображе�
   setupEffects();
   document.addEventListener('keydown', onEscapeEvent);
 };
-const validateHashtag = (hashtag) => { // Функция настроек валидации хэштега
+const setupHashtagRegex = (hashtag) => { // Функция настроек валидации хэштега
   const regex = /^#[a-zа-яё0-9]{1,19}$/i;
   return regex.test(hashtag);
 };
-const areHashtagsUnique = (hashtags) => { // Функция для проверки уникальности хэштегов
+const checkDuplicateHashtags = (hashtags) => { // Функция для проверки уникальности хэштегов
   const seenHashtag = new Set();
   for (let i = 0; i < hashtags.length; i++) {
     const currentHashtag = hashtags[i].toLowerCase();
@@ -49,15 +49,15 @@ const areHashtagsUnique = (hashtags) => { // Функция для провер�
   }
   return true;
 };
-const areHashtagsValid = (hashtagsString) => { // Функция для проверки хэштегов на валидность
+const validateHashtags = (hashtagsString) => { // Функция для проверки хэштегов на валидность
   const MAX_HASHTAGS = 5;
   const trimmed = hashtagsString.trim();
   if (!trimmed) {
     return true;
   }
   const hashtags = trimmed.split(' ');
-  const validHashtags = hashtags.every((hashtag) => validateHashtag(hashtag));
-  return validHashtags && hashtags.length <= MAX_HASHTAGS && areHashtagsUnique(hashtags);
+  const validHashtags = hashtags.every((hashtag) => setupHashtagRegex(hashtag));
+  return validHashtags && hashtags.length <= MAX_HASHTAGS && checkDuplicateHashtags(hashtags);
 };
 const MAX_COMMENT_LENGTH = 140;
 const validateComment = (comment) => comment.length <= MAX_COMMENT_LENGTH; // Функция настроек валидации комментария
@@ -82,7 +82,7 @@ const configureFormValidation = () => { // Функция конфигураци
     }
   });
   fileInput.addEventListener('change', showUploadFormHandler);
-  pristine.addValidator(hashtagInput, areHashtagsValid, 'Хэштег невалиден.');
+  pristine.addValidator(hashtagInput, validateHashtags, 'Хэштег невалиден.');
   pristine.addValidator(descriptionInput, validateComment, 'Длина комментария не может составлять больше 140 символов.');
 };
 
