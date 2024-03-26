@@ -2,6 +2,7 @@ const uploadImage = document.querySelector('.img-upload__preview');
 const scaleSmaller = document.querySelector('.scale__control--smaller');
 const scaleBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
+const defaultScale = 1; // Значение по умолчанию для масштаба изображения
 const updateScale = (scale) => { // Функция для обновления отображения значения масштаба
   scaleValue.value = `${scale * 100}%`;
   uploadImage.style.transform = `scale(${scale})`;
@@ -22,4 +23,4 @@ function resetScale () { // Функция для сброса масштаба 
   uploadImage.style.transform = '';
 }
 
-export {updateScale, resetScale};
+export {defaultScale, updateScale, resetScale};

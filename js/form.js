@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {updateScale, resetScale} from './image-scale.js';
+import {defaultScale, updateScale, resetScale} from './image-scale.js';
 import {setupEffects} from './image-effects.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
@@ -30,7 +30,7 @@ const displayUploadForm = () => { // Функция для отображени�
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   resetScale();
-  updateScale(1);
+  updateScale(defaultScale);
   setupEffects();
   document.addEventListener('keydown', onEscapeEvent);
 };
