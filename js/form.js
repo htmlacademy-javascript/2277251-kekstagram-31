@@ -17,16 +17,16 @@ const onSubmitForm = (evt) => { // Функция для отправки фор
   evt.preventDefault();
   if (pristine.validate()) {
     uploadForm.submit();
-    hideUploadForm();
+    hideUploadFormHandler();
   }
 };
 const onEscapeEvent = (evt) => { // Функция для закрытия формы, на нажатие Escape
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    hideUploadForm();
+    hideUploadFormHandler();
   }
 };
-const showUploadForm = () => { // Функция для отображения формы загрузки
+const showUploadFormHandler = () => { // Функция для отображения формы загрузки
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   resetScale();
@@ -61,7 +61,7 @@ const areHashtagsValid = (hashtagsString) => { // Функция для пров
 };
 const MAX_COMMENT_LENGTH = 140;
 const validateComment = (comment) => comment.length <= MAX_COMMENT_LENGTH; // Функция настроек валидации комментария
-function hideUploadForm() { // Функция скрытия формы загрузки
+function hideUploadFormHandler() { // Функция скрытия формы загрузки
   pristine.reset();
   uploadForm.reset();
   overlay.classList.add('hidden');
@@ -70,7 +70,7 @@ function hideUploadForm() { // Функция скрытия формы загр
 }
 const configureFormValidation = () => { // Функция конфигурации проверки формы
   uploadForm.addEventListener('submit', onSubmitForm);
-  closeButton.addEventListener('click', hideUploadForm);
+  closeButton.addEventListener('click', hideUploadFormHandler);
   descriptionInput.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
       evt.stopPropagation();
@@ -81,7 +81,7 @@ const configureFormValidation = () => { // Функция конфигураци
       evt.stopPropagation();
     }
   });
-  fileInput.addEventListener('change', showUploadForm);
+  fileInput.addEventListener('change', showUploadFormHandler);
   pristine.addValidator(hashtagInput, areHashtagsValid, 'Хэштег невалиден.');
   pristine.addValidator(descriptionInput, validateComment, 'Длина комментария не может составлять больше 140 символов.');
 };
