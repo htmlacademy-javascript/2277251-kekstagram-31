@@ -26,7 +26,7 @@ const onEscapeEvent = (evt) => { // Функция для закрытия фо�
     hideUploadForm();
   }
 };
-const displayUploadForm = () => { // Функция для отображения формы загрузки
+const showUploadForm = () => { // Функция для отображения формы загрузки
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   resetScale();
@@ -82,7 +82,7 @@ const configureFormValidation = () => { // Функция конфигураци
       evt.stopPropagation();
     }
   });
-  fileInput.addEventListener('change', displayUploadForm);
+  fileInput.addEventListener('change', showUploadForm);
   pristine.addValidator(hashtagInput, areHashtagsValid, 'Хэштег невалиден.');
   pristine.addValidator(descriptionInput, validateComment, 'Длина комментария не может составлять больше 140 символов.');
 };
