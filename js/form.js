@@ -33,13 +33,13 @@ const onSubmitForm = (evt) => { // Функция для отправки фор
   if (isValid) {
     blockSubmitButton();
     sendData(new FormData(evt.target))
-      .then(hideUploadFormHandler())
+      .then(hideUploadFormHandler)
       .catch(
         (err) => {
           showAlert(err.message);
         }
       )
-      .finally(unblockSubmitButton());
+      .finally(unblockSubmitButton);
   }
 };
 const onEscapeEvent = (evt) => { // Функция для закрытия формы, на нажатие Escape
