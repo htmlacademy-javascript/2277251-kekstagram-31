@@ -1,4 +1,4 @@
-import {isEscapeKey} from './util.js';
+import {isEscapeKey, showAlert} from './util.js';
 import {DEFAULT_SCALE, updateScale, resetScale} from './image-scale.js';
 import {setupEffects} from './image-effects.js';
 
@@ -15,9 +15,27 @@ const pristine = new Pristine(uploadForm, {
 });
 const onSubmitForm = (evt) => { // Функция для отправки формы
   evt.preventDefault();
-  if (pristine.validate()) {
-    uploadForm.submit();
-    hideUploadFormHandler();
+  const isValid = pristine.validate();
+  if (isValid) {
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://31.javascript.htmlacademy.pro/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+      .then((response) => {
+        if (response.ok) {
+          hideUploadFormHandler();
+        } else {
+          throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
+        }
+      })
+      .catch((err) => {
+        showAlert(err.message);
+      });
   }
 };
 const onEscapeEvent = (evt) => { // Функция для закрытия формы, на нажатие Escape
