@@ -38,10 +38,22 @@ const showSuccessAlert = () => {
   }
 };
 const showErrorAlert = () => {
-  const errorTemplate = document.querySelector('#data-error').content;
+  const errorTemplate = document.querySelector('#error').content;
   const errorElement = errorTemplate.cloneNode(true);
   document.body.append(errorElement);
-  const errorMessage = document.querySelector('.data-error');
+  const errorMessage = document.querySelector('.error');
+  const errorInner = document.querySelector('.error__inner');
+  document.querySelector('.error__button').addEventListener('click', removeMessageHandler);
+  document.addEventListener('keydown', closeEventsHandler);
+  document.addEventListener('click', closeEventsHandler);
+  function removeMessageHandler () {
+    errorMessage.remove();
+  }
+  function closeEventsHandler (evt) {
+    if (isEscapeKey(evt) || !errorInner.contains(evt.target)) {
+      removeMessageHandler();
+    }
+  }
   setTimeout(() => {
     errorMessage.remove();
   }, ALERT_SHOW_TIME);
