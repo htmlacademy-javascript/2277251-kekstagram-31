@@ -19,15 +19,23 @@ const clearComments = () => {
     commentsList.removeChild(commentsList.firstChild);
   }
 };
-
 const showSuccessAlert = () => {
   const successTemplate = document.querySelector('#success').content;
   const successElement = successTemplate.cloneNode(true);
   document.body.append(successElement);
   const successMessage = document.querySelector('.success');
-  setTimeout(() => {
+  const successInner = document.querySelector('.success__inner');
+  document.querySelector('.success__button').addEventListener('click', removeMessageHandler);
+  document.addEventListener('keydown', closeEventsHandler);
+  document.addEventListener('click', closeEventsHandler);
+  function removeMessageHandler () {
     successMessage.remove();
-  }, ALERT_SHOW_TIME);
+  }
+  function closeEventsHandler (evt) {
+    if (isEscapeKey(evt) || !successInner.contains(evt.target)) {
+      removeMessageHandler();
+    }
+  }
 };
 const showErrorAlert = () => {
   const errorTemplate = document.querySelector('#data-error').content;
