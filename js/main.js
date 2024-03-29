@@ -1,7 +1,7 @@
 import {renderThumbnails} from './thumbnails.js';
 import {configureFormValidation} from './form.js';
 import {getData} from './api.js';
-import {showAlert} from './util.js';
+import {showErrorAlert} from './util.js';
 
 getData()
   .then((images) => {
@@ -9,7 +9,7 @@ getData()
   })
   .catch(
     (err) => {
-      showAlert(err.message);
+      showErrorAlert(err.message);
     }
   );
 

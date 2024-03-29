@@ -1,4 +1,4 @@
-import {isEscapeKey, showAlert} from './util.js';
+import {isEscapeKey, showSuccessAlert, showErrorAlert} from './util.js';
 import {DEFAULT_SCALE, updateScale, resetScale} from './image-scale.js';
 import {setupEffects} from './image-effects.js';
 import {sendData} from './api.js';
@@ -33,12 +33,13 @@ const onSubmitForm = (evt) => { // Функция для отправки фор
   if (isValid) {
     blockSubmitButton();
     sendData(new FormData(evt.target))
-      .then(hideUploadFormHandler)
-      .catch(
-        (err) => {
-          showAlert(err.message);
-        }
-      )
+      .then(() => {
+        hideUploadFormHandler();
+        showSuccessAlert();
+      })
+      .catch((err) => {
+        showErrorAlert(err.message);
+      })
       .finally(unblockSubmitButton);
   }
 };

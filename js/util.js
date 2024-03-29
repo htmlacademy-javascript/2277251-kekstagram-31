@@ -20,7 +20,16 @@ const clearComments = () => {
   }
 };
 
-const showAlert = () => {
+const showSuccessAlert = () => {
+  const successTemplate = document.querySelector('#success').content;
+  const successElement = successTemplate.cloneNode(true);
+  document.body.append(successElement);
+  const successMessage = document.querySelector('.success');
+  setTimeout(() => {
+    successMessage.remove();
+  }, ALERT_SHOW_TIME);
+};
+const showErrorAlert = () => {
   const errorTemplate = document.querySelector('#data-error').content;
   const errorElement = errorTemplate.cloneNode(true);
   document.body.append(errorElement);
@@ -30,4 +39,4 @@ const showAlert = () => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments, showAlert};
+export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments, showSuccessAlert, showErrorAlert};
