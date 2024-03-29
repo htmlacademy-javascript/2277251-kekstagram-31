@@ -1,6 +1,7 @@
 import {isEscapeKey, showAlert} from './util.js';
 import {DEFAULT_SCALE, updateScale, resetScale} from './image-scale.js';
 import {setupEffects} from './image-effects.js';
+import {sendData} from './api.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const fileInput = document.querySelector('.img-upload__input');
@@ -8,34 +9,37 @@ const overlay = document.querySelector('.img-upload__overlay');
 const closeButton = document.querySelector('.img-upload__cancel');
 const hashtagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
 });
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
 const onSubmitForm = (evt) => { // Функция для отправки формы
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://31.javascript.htmlacademy.pro/kekstagram',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-      .then((response) => {
-        if (response.ok) {
-          hideUploadFormHandler();
-        } else {
-          throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
+    blockSubmitButton();
+    sendData(new FormData(evt.target))
+      .then(hideUploadFormHandler())
+      .catch(
+        (err) => {
+          showAlert(err.message);
         }
-      })
-      .catch((err) => {
-        showAlert(err.message);
-      });
+      )
+      .finally(unblockSubmitButton());
   }
 };
 const onEscapeEvent = (evt) => { // Функция для закрытия формы, на нажатие Escape

@@ -1,11 +1,16 @@
 import {renderThumbnails} from './thumbnails.js';
 import {configureFormValidation} from './form.js';
+import {getData} from './api.js';
+import {showAlert} from './util.js';
 
-fetch('https://31.javascript.htmlacademy.pro/kekstagram/data')
-  .then((response) => response.json())
+getData()
   .then((images) => {
     renderThumbnails(images);
-  });
-
+  })
+  .catch(
+    (err) => {
+      showAlert(err.message);
+    }
+  );
 
 configureFormValidation();
