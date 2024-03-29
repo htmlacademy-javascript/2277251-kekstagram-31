@@ -1,7 +1,8 @@
-import {isEscapeKey, showSuccessAlert, showErrorAlert} from './util.js';
+import {isEscapeKey} from './util.js';
 import {DEFAULT_SCALE, updateScale, resetScale} from './image-scale.js';
 import {setupEffects} from './image-effects.js';
 import {sendData} from './api.js';
+import {showSuccessAlert, showErrorAlert} from './alerts.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const fileInput = document.querySelector('.img-upload__input');
