@@ -7,6 +7,9 @@ getData()
   .then((images) => {
     renderThumbnails(images);
   })
+  .then(() => {
+    document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+  })
   .catch(
     (err) => {
       showDataError(err.message);

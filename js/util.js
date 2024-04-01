@@ -18,8 +18,8 @@ const clearComments = () => {
     commentsList.removeChild(commentsList.firstChild);
   }
 };
-
-const debounce = (callback, timeoutDelay = 500) => { // Функция для устранения дребезга
+const DEBOUNCE_DELAY = 500;
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => { // Функция для устранения дребезга
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
