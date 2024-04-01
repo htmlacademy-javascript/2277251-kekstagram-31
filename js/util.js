@@ -19,4 +19,23 @@ const clearComments = () => {
   }
 };
 
-export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments};
+const debounce = (callback, timeoutDelay = 500) => { // Функция для устранения дребезга
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+const throttle = (callback, delayBetweenFrames) => { // Функция для пропуска кадров
+  let lastTime = 0;
+  return (...rest) => {
+    const now = new Date();
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
+};
+
+export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments, debounce, throttle};
