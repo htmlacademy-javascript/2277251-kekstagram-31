@@ -50,7 +50,7 @@ const setImageStyle = (effect) => { // Применяем эффект к изо
     });
   }
 };
-const selectImageEffect = (evt) => { // Обработка выбора эффекта
+const selectImageEffectHandler = (evt) => { // Обработка выбора эффекта
   const selectedInput = evt.target.closest('.effects__radio'); // Находим выбранный элемент радиокнопки
   if (selectedInput) {
     const selectedEffect = selectedInput.value;
@@ -59,7 +59,7 @@ const selectImageEffect = (evt) => { // Обработка выбора эффе
 };
 const setupEffects = () => { // Инициализируем эффекты
   undoEffects();
-  effectsList.addEventListener('change', selectImageEffect);
+  effectsList.addEventListener('change', selectImageEffectHandler);
 };
 
 export {setupEffects};
