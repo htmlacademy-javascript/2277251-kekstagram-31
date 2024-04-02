@@ -26,15 +26,5 @@ const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => { // Функци�
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
-const throttle = (callback, delayBetweenFrames) => { // Функция для пропуска кадров
-  let lastTime = 0;
-  return (...rest) => {
-    const now = new Date();
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-};
 
-export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments, debounce, throttle};
+export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments, debounce, DEBOUNCE_DELAY};
