@@ -4,6 +4,12 @@ import {setupEffects} from './image-effects.js';
 import {sendData} from './api.js';
 import {showSuccessAlert, showErrorAlert} from './alerts.js';
 
+const MAX_HASHTAGS = 5;
+const MAX_COMMENT_LENGTH = 140;
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
 const uploadForm = document.querySelector('.img-upload__form');
 const fileInput = document.querySelector('.img-upload__input');
 const overlay = document.querySelector('.img-upload__overlay');
@@ -11,10 +17,6 @@ const closeButton = document.querySelector('.img-upload__cancel');
 const hashtagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
-const SubmitButtonText = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Публикую...'
-};
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -74,7 +76,6 @@ const checkDuplicateHashtags = (hashtags) => { // Функция для пров
   return true;
 };
 const validateHashtags = (hashtagsString) => { // Функция для проверки хэштегов на валидность
-  const MAX_HASHTAGS = 5;
   const trimmed = hashtagsString.trim();
   if (!trimmed) {
     return true;
@@ -83,7 +84,6 @@ const validateHashtags = (hashtagsString) => { // Функция для пров
   const validHashtags = hashtags.every((hashtag) => setupHashtagRegex(hashtag));
   return validHashtags && hashtags.length <= MAX_HASHTAGS && checkDuplicateHashtags(hashtags);
 };
-const MAX_COMMENT_LENGTH = 140;
 const validateComment = (comment) => comment.length <= MAX_COMMENT_LENGTH; // Функция настроек валидации комментария
 function hideUploadFormHandler() { // Функция скрытия формы загрузки
   pristine.reset();
