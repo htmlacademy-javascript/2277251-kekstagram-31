@@ -14,10 +14,15 @@ const showSuccessAlert = () => {
     successMessage.remove();
   }
   function closeEventsHandler (evt) {
-    if (isEscapeKey(evt) || !successInner.contains(evt.target)) {
+    if (isEscapeKey(evt)) {
       removeMessageHandler();
     }
   }
+  document.addEventListener('click', (evt) => {
+    if (evt.target !== successInner && !successInner.contains(evt.target)) {
+      removeMessageHandler();
+    }
+  });
 };
 const showErrorAlert = () => {
   const errorTemplate = document.querySelector('#error').content;
@@ -32,10 +37,15 @@ const showErrorAlert = () => {
     errorMessage.remove();
   }
   function closeEventsHandler (evt) {
-    if (isEscapeKey(evt) || !errorInner.contains(evt.target)) {
+    if (isEscapeKey(evt)) {
       removeMessageHandler();
     }
   }
+  document.addEventListener('click', (evt) => {
+    if (evt.target !== errorInner && !errorInner.contains(evt.target)) {
+      removeMessageHandler();
+    }
+  });
 };
 const showDataError = () => {
   const dataErrorTemplate = document.querySelector('#data-error').content;
