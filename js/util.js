@@ -1,5 +1,6 @@
 import {closePopup, commentsList} from './popup.js';
 
+const DEBOUNCE_DELAY = 500;
 const getRandomInteger = (a, b) => { // Функция для генерации случайного числа от min до max
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -18,7 +19,6 @@ const clearComments = () => {
     commentsList.removeChild(commentsList.firstChild);
   }
 };
-const DEBOUNCE_DELAY = 500;
 const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => { // Функция для устранения дребезга
   let timeoutId;
   return (...rest) => {
@@ -26,7 +26,6 @@ const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => { // Функци�
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
-
 const throttle = (callback, delayBetweenFrames) => { // Функция для пропуска кадров
   let lastTime = 0;
   return (...rest) => {
