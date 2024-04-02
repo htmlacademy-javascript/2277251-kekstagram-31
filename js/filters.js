@@ -12,33 +12,33 @@ const setActiveButton = (currentButton) => {
   }
   currentButton.classList.add('img-filters__button--active');
 };
-const sortByComments = (image1, image2) => image2.comments.length - image1.comments.length;
-const applyDefaultFilter = (images) => () => {
+const sortByComments = (image1, image2) => image2.comments.length - image1.comments.length; // Сортировка изображений по количеству комментариев
+const applyDefaultFilter = (images) => () => { // Фильтр по умолчанию, рендерим все изображения
   renderThumbnails(images);
 };
-const applyRandomFilter = (images) => () => {
+const applyRandomFilter = (images) => () => { // Фильтр рандомных изображений, перетасовываем и копируем нужное количество
   const shuffledImages = images.slice().sort(() => 0.5 - Math.random()).slice(0, MAX_RANDOM_PHOTO_COUNT);
   renderThumbnails(shuffledImages);
 };
-const applyDiscussedFilter = (images) => () => {
+const applyDiscussedFilter = (images) => () => { // Фильтр обсуждаемых изображений, сортируемых по количеству комментариев
   const copiedImages = images.slice(0).sort(sortByComments);
   renderThumbnails(copiedImages);
 };
-const handleDefaultButton = (images) => {
+const handleDefaultButton = (images) => { // Обрабатываем нажатие кнопки, применяя фильтр по умолчанию
   const debouncedFilter = debounce(applyDefaultFilter(images), DEBOUNCE_DELAY);
   filterDefault.addEventListener('click', (evt) => {
     setActiveButton(evt.target);
     debouncedFilter();
   });
 };
-const handleRandomButton = (images, count) => {
+const handleRandomButton = (images, count) => { // Обрабатываем нажатие кнопки, применяя рандомный фильтр
   const debouncedFilter = debounce(applyRandomFilter(images, count), DEBOUNCE_DELAY);
   filterRandom.addEventListener('click', (evt) => {
     setActiveButton(evt.target);
     debouncedFilter();
   });
 };
-const handleDiscussedButton = (images) => {
+const handleDiscussedButton = (images) => { // Обрабатываем нажатие кнопки, применяя фильтр по обсуждению
   const debouncedFilter = debounce(applyDiscussedFilter(images), DEBOUNCE_DELAY);
   filterDiscussed.addEventListener('click', (evt) => {
     setActiveButton(evt.target);
