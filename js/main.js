@@ -6,10 +6,10 @@ import {MAX_RANDOM_PHOTO_COUNT, handleDefaultButton, handleRandomButton, handleD
 
 getData()
   .then((images) => {
-    renderThumbnails(images);
-    handleDefaultButton(images);
-    handleRandomButton(images, MAX_RANDOM_PHOTO_COUNT);
-    handleDiscussedButton(images);
+    renderThumbnails(images); // Отрисовка изображений с сервера
+    handleDefaultButton(images); // Отрисовка изображений по умолчанию
+    handleRandomButton(images, MAX_RANDOM_PHOTO_COUNT); // Отрисовка рандомных изображений до выбранного значения
+    handleDiscussedButton(images); // Отрисовка изображений, отсортированных по количеству комментариев.
   })
   .then(() => {
     document.querySelector('.img-filters').classList.remove('img-filters--inactive');
