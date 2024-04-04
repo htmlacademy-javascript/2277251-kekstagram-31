@@ -8,16 +8,22 @@ const showSuccessAlert = () => {
   const successMessage = document.querySelector('.success');
   const successInner = document.querySelector('.success__inner');
   document.querySelector('.success__button').addEventListener('click', removeMessageHandler);
-  document.addEventListener('keydown', closeEventsHandler);
-  document.addEventListener('click', closeEventsHandler);
+  document.body.addEventListener('keydown', closeEventsHandler);
+  document.body.addEventListener('click', closeEventsHandler);
   function removeMessageHandler () {
     successMessage.remove();
+    document.body.removeEventListener('keydown', closeEventsHandler);
   }
   function closeEventsHandler (evt) {
-    if (isEscapeKey(evt) || !successInner.contains(evt.target)) {
+    if (isEscapeKey(evt)) {
       removeMessageHandler();
     }
   }
+  document.body.addEventListener('click', (evt) => {
+    if (evt.target !== successInner && !successInner.contains(evt.target)) {
+      removeMessageHandler();
+    }
+  });
 };
 const showErrorAlert = () => {
   const errorTemplate = document.querySelector('#error').content;
@@ -26,16 +32,23 @@ const showErrorAlert = () => {
   const errorMessage = document.querySelector('.error');
   const errorInner = document.querySelector('.error__inner');
   document.querySelector('.error__button').addEventListener('click', removeMessageHandler);
-  document.addEventListener('keydown', closeEventsHandler);
-  document.addEventListener('click', closeEventsHandler);
+  document.body.addEventListener('keydown', closeEventsHandler);
+  document.body.addEventListener('click', closeEventsHandler);
   function removeMessageHandler () {
     errorMessage.remove();
+    document.body.removeEventListener('keydown', closeEventsHandler);
   }
   function closeEventsHandler (evt) {
-    if (isEscapeKey(evt) || !errorInner.contains(evt.target)) {
+    evt.stopPropagation();
+    if (isEscapeKey(evt)) {
       removeMessageHandler();
     }
   }
+  document.body.addEventListener('click', (evt) => {
+    if (evt.target !== errorInner && !errorInner.contains(evt.target)) {
+      removeMessageHandler();
+    }
+  });
 };
 const showDataError = () => {
   const dataErrorTemplate = document.querySelector('#data-error').content;
