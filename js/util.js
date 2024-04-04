@@ -1,4 +1,4 @@
-import {closePopup, commentsList} from './popup.js';
+import {closePopup} from './popup.js';
 
 const DEBOUNCE_DELAY = 500;
 const getRandomInteger = (a, b) => { // Функция для генерации случайного числа от min до max
@@ -14,11 +14,6 @@ const onEscapeEvent = (evt) => {
     closePopup();
   }
 };
-const clearComments = () => {
-  while (commentsList.firstChild) {
-    commentsList.removeChild(commentsList.firstChild);
-  }
-};
 const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => { // Функция для устранения дребезга
   let timeoutId;
   return (...rest) => {
@@ -27,4 +22,4 @@ const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => { // Функци�
   };
 };
 
-export {getRandomInteger, isEscapeKey, onEscapeEvent, clearComments, debounce, DEBOUNCE_DELAY};
+export {getRandomInteger, isEscapeKey, onEscapeEvent, debounce, DEBOUNCE_DELAY};

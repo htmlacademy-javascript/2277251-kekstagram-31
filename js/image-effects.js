@@ -62,4 +62,4 @@ const setupEffects = () => { // Инициализируем эффекты
   effectsList.addEventListener('change', selectImageEffectHandler);
 };
 
-export {setupEffects};
+export {setupEffects, uploadedImage};

@@ -3,6 +3,7 @@ import {DEFAULT_SCALE, updateScale, resetScale} from './image-scale.js';
 import {setupEffects} from './image-effects.js';
 import {sendData} from './api.js';
 import {showSuccessAlert, showErrorAlert} from './alerts.js';
+import {handleFileChange} from './chosen-image.js';
 
 const MAX_HASHTAGS = 5;
 const MAX_COMMENT_LENGTH = 140;
@@ -55,6 +56,8 @@ const onEscapeEvent = (evt) => { // Функция для закрытия фо�
 const showUploadFormHandler = () => { // Функция для отображения формы загрузки
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  const file = fileInput.files[0];
+  handleFileChange(file);
   resetScale();
   updateScale(DEFAULT_SCALE);
   setupEffects();
@@ -110,4 +113,4 @@ const configureFormValidation = () => { // Функция конфигураци
   pristine.addValidator(descriptionInput, validateComment, 'Длина комментария не может составлять больше 140 символов.');
 };
 
-export {configureFormValidation};
+export {fileInput, configureFormValidation};
