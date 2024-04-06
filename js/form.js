@@ -67,6 +67,9 @@ const normalizeHashtags = (hashtags) => hashtags.trim().toLowerCase().split(' ')
 const setupHashtagRegex = (hashtags) => { // Проверка на соответствие шаблону регулярного выражения для хэштега
   const regex = /^#[a-zа-яё0-9]{1,19}$/i;
   const normalizedHashtags = normalizeHashtags(hashtags);
+  if (!hashtags) {
+    return true;
+  }
   return normalizedHashtags.every((hashtag) => regex.test(hashtag));
 };
 const checkHashtagsCount = (hashtags) => { // Проверяем, что количество хэштегов меньше или равно максимальному
