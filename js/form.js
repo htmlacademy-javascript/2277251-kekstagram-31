@@ -63,29 +63,29 @@ const showUploadFormHandler = () => { // Функция для отображе�
   setupEffects();
   document.addEventListener('keydown', onEscapeEvent);
 };
-const setupHashtagRegex = (hashtag) => { // Функция настроек валидации хэштега
+const normalizeHashtags = (hashtags) => hashtags.trim().toLowerCase().split(' ');
+const setupHashtagRegex = (hashtags) => { // Проверка на соответствие шаблону регулярного выражения для хэштега
   const regex = /^#[a-zа-яё0-9]{1,19}$/i;
-  return regex.test(hashtag);
-};
-const checkDuplicateHashtags = (hashtags) => { // Функция для проверки уникальности хэштегов
-  const seenHashtag = new Set();
-  for (let i = 0; i < hashtags.length; i++) {
-    const currentHashtag = hashtags[i].toLowerCase();
-    if (seenHashtag.has(currentHashtag)) {
-      return false;
-    }
-    seenHashtag.add(currentHashtag);
-  }
-  return true;
-};
-const validateHashtags = (hashtagsString) => { // Функция для проверки хэштегов на валидность
-  const trimmed = hashtagsString.trim();
-  if (!trimmed) {
+  const normalizedHashtags = normalizeHashtags(hashtags);
+  if (!hashtags) {
     return true;
   }
-  const hashtags = trimmed.split(' ');
-  const validHashtags = hashtags.every((hashtag) => setupHashtagRegex(hashtag));
-  return validHashtags && hashtags.length <= MAX_HASHTAGS && checkDuplicateHashtags(hashtags);
+  return normalizedHashtags.every((hashtag) => regex.test(hashtag));
+};
+const checkHashtagsCount = (hashtags) => { // Проверяем, что количество хэштегов меньше или равно максимальному
+  const normalizedHashtags = normalizeHashtags(hashtags);
+  return normalizedHashtags.length <= MAX_HASHTAGS;
+};
+const checkDuplicateHashtags = (hashtags) => { // Проверка дубликатов хэштегов путем фильтрации уникальных элементов
+  const normalizedHashtags = normalizeHashtags(hashtags);
+  if (normalizedHashtags.length) {
+    const uniqueHashtags = normalizedHashtags.filter((element, index) => {
+      if (normalizedHashtags.indexOf(element) !== index) {
+        return element;
+      }
+    });
+    return uniqueHashtags.length === 0;
+  }
 };
 const validateComment = (comment) => comment.length <= MAX_COMMENT_LENGTH; // Функция настроек валидации комментария
 function hideUploadFormHandler() { // Функция скрытия формы загрузки
@@ -95,6 +95,12 @@ function hideUploadFormHandler() { // Функция скрытия формы �
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeEvent);
 }
+const formValidations = [
+  [hashtagInput, setupHashtagRegex, 'Введён невалидный хэштег'],
+  [hashtagInput, checkHashtagsCount, 'Не более 5 хештегов'],
+  [hashtagInput, checkDuplicateHashtags , 'Хештеги не должны повторяться'],
+  [descriptionInput, validateComment, 'Длина комментария больше 140 символов'],
+];
 const configureFormValidation = () => { // Функция конфигурации проверки формы
   uploadForm.addEventListener('submit', onSubmitForm);
   closeButton.addEventListener('click', hideUploadFormHandler);
@@ -109,8 +115,7 @@ const configureFormValidation = () => { // Функция конфигураци
     }
   });
   fileInput.addEventListener('change', showUploadFormHandler);
-  pristine.addValidator(hashtagInput, validateHashtags, 'Хэштег невалиден.');
-  pristine.addValidator(descriptionInput, validateComment, 'Длина комментария не может составлять больше 140 символов.');
+  formValidations.forEach(([element, validation, errorText]) => pristine.addValidator(element, validation, errorText));
 };
 
 export {fileInput, configureFormValidation};
