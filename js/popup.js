@@ -11,7 +11,7 @@ const commentInput = document.querySelector('.social__footer-text');
 const closeButton = document.querySelector('.big-picture__cancel');
 let allComments = [];
 let currentCount = 0;
-const addComments = () => { // Функция добавления комментариев в список
+const addCommentsHandler = () => { // Функция добавления комментариев в список
   const visibleComments = allComments.slice(currentCount, currentCount + MAX_COMMENTS_COUNT); // Получаем текущие комментарии
   const visibleCommentsLength = visibleComments.length + currentCount; // Считаем общее количество комментариев, показанных на данный момент
   visibleComments.forEach(({avatar, name, message}) => {
@@ -37,8 +37,8 @@ const clearComments = () => { // Очищаем существующие ком�
 };
 const loadAndDisplayComments = (initialComments) => { // Загрузка и отображение начальных комментариев
   allComments = initialComments; // Устанавливаем общее количество комментариев из переданных данных
-  addComments(); // Загружаем первую партию комментариев
-  commentLoader.addEventListener('click', addComments); // Добавляем обработчик для загрузки дополнительных комментариев
+  addCommentsHandler(); // Загружаем первую партию комментариев
+  commentLoader.addEventListener('click', addCommentsHandler); // Добавляем обработчик для загрузки дополнительных комментариев
 };
 const displayPopupImage = ({url, description, likes, comments}) => { // Функция для отображения деталей фотографии в попапе
   const popupImage = bigImage.querySelector('.big-picture__img img');
