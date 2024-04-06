@@ -60,7 +60,7 @@ const openPopup = (photo) => { // Функция открытия попапа
   });
   document.addEventListener('keydown', onEscapeEvent);
 };
-function closePopup () { // Функция закрытия попапа (function declaration для hoisting)
+const closePopup = () => { // Функция закрытия попапа (function declaration для hoisting)
   bigImage.classList.add('hidden');
   commentLoader.classList.remove('hidden');
   document.body.classList.remove('modal-open');

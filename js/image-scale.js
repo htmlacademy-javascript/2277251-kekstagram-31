@@ -21,8 +21,8 @@ scaleSmaller.addEventListener('click', () => {
 scaleBigger.addEventListener('click', () => {
   changeScale(SCALE_STEP);
 });
-function resetScale () { // Функция для сброса масштаба изображения
+const resetScale = () => { // Функция для сброса масштаба изображения
   uploadImage.style.transform = '';
-}
+};
 
 export {DEFAULT_SCALE, updateScale, resetScale};
