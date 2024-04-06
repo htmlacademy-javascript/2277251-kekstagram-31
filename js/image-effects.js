@@ -4,11 +4,11 @@ const effectValue = document.querySelector('.effect-level__value');
 const effectSlider = document.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
 const effects = {
-  chrome: {filter: 'grayscale', min: 0, max: 1, start: 1, step: 0.01},
-  sepia: {filter: 'sepia', min: 0, max: 1, start: 1, step: 0.01},
-  marvin: {filter: 'invert', min: 0, max: 1, start: 1, step: 0.01},
-  phobos: {filter: 'blur', min: 0, max: 3, start: 3, step: 0.01},
-  heat: {filter: 'brightness', min: 1, max: 3, start: 3, step: 0.01}
+  chrome: {filter: 'grayscale', min: 0, max: 1, start: 1, step: 0.1},
+  sepia: {filter: 'sepia', min: 0, max: 1, start: 1, step: 0.1},
+  marvin: {filter: 'invert', min: 0, max: 100, start: 100, step: 1, units: '%'},
+  phobos: {filter: 'blur', min: 0, max: 3, start: 3, step: 0.1, units: 'px'},
+  heat: {filter: 'brightness', min: 1, max: 3, start: 3, step: 0.1}
 };
 noUiSlider.create(effectSlider, { // Инициализируем слайдер
   range: {
@@ -34,7 +34,7 @@ const setImageStyle = (effect) => { // Применяем эффект к изо
   if (effect === 'none') {
     undoEffects();
   } else {
-    const {filter, min, max, start, step} = effects[effect]; // Получаем свойства эффекта
+    const {filter, min, max, start, step, units} = effects[effect]; // Получаем свойства эффекта
     effectLevel.classList.remove('hidden');
     effectSlider.noUiSlider.updateOptions({ // Обновляем параметры слайдера
       range: {
@@ -46,7 +46,7 @@ const setImageStyle = (effect) => { // Применяем эффект к изо
       connect: 'lower'
     });
     effectSlider.noUiSlider.on('update', () => { // Применяем фильтр при изменении эффекта
-      uploadedImage.style.filter = `${filter}(${effectValue.value}${effect === 'phobos' ? 'px' : ''})`;
+      uploadedImage.style.filter = `${filter}(${effectValue.value}${units ?? ''})`;
     });
   }
 };
