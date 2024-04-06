@@ -66,7 +66,7 @@ const closePopup = () => { // Функция закрытия попапа (func
   document.body.classList.remove('modal-open');
   clearComments();
   document.removeEventListener('keydown', onEscapeEvent);
-}
+};
 closeButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   closePopup();
