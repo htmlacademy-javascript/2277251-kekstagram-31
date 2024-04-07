@@ -118,4 +118,4 @@ const configureFormValidation = () => { // Функция конфигураци
   formValidations.forEach(([element, validation, errorText]) => pristine.addValidator(element, validation, errorText));
 };
 
-export {fileInput, configureFormValidation};
+export {configureFormValidation};
