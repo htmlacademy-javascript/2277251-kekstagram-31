@@ -29,13 +29,13 @@ const showErrorAlert = () => {
   const errorTemplateEl = document.querySelector('#error').content;
   const errorElement = errorTemplateEl.cloneNode(true);
   document.body.append(errorElement);
-  const errorMessage = document.querySelector('.error');
-  const errorInner = document.querySelector('.error__inner');
+  const errorMessageEl = document.querySelector('.error');
+  const errorInnerEl = document.querySelector('.error__inner');
   document.querySelector('.error__button').addEventListener('click', removeMessageHandler);
   document.body.addEventListener('keydown', closeEventsHandler);
   document.body.addEventListener('click', closeEventsHandler);
   function removeMessageHandler () {
-    errorMessage.remove();
+    errorMessageEl.remove();
     document.body.removeEventListener('keydown', closeEventsHandler);
   }
   function closeEventsHandler (evt) {
@@ -45,7 +45,7 @@ const showErrorAlert = () => {
     }
   }
   document.body.addEventListener('click', (evt) => {
-    if (evt.target !== errorInner && !errorInner.contains(evt.target)) {
+    if (evt.target !== errorInnerEl && !errorInnerEl.contains(evt.target)) {
       removeMessageHandler();
     }
   });
@@ -54,9 +54,9 @@ const showDataError = () => {
   const dataErrorTemplateEl = document.querySelector('#data-error').content;
   const dataErrorElement = dataErrorTemplateEl.cloneNode(true);
   document.body.append(dataErrorElement);
-  const dataErrorMessage = document.querySelector('.data-error');
+  const dataErrorMessageEl = document.querySelector('.data-error');
   setTimeout(() => {
-    dataErrorMessage.remove();
+    dataErrorMessageEl.remove();
   }, ALERT_SHOW_TIME);
 };
 
