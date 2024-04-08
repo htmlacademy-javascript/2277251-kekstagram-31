@@ -2,16 +2,16 @@ import { isEscapeKey } from './util.js';
 
 const ALERT_SHOW_TIME = 5000;
 const showSuccessAlert = () => {
-  const successTemplate = document.querySelector('#success').content;
-  const successElement = successTemplate.cloneNode(true);
+  const successTemplateEl = document.querySelector('#success').content;
+  const successElement = successTemplateEl.cloneNode(true);
   document.body.append(successElement);
-  const successMessage = document.querySelector('.success');
-  const successInner = document.querySelector('.success__inner');
+  const successMessageEl = document.querySelector('.success');
+  const successInnerEl = document.querySelector('.success__inner');
   document.querySelector('.success__button').addEventListener('click', removeMessageHandler);
   document.body.addEventListener('keydown', closeEventsHandler);
   document.body.addEventListener('click', closeEventsHandler);
   function removeMessageHandler () {
-    successMessage.remove();
+    successMessageEl.remove();
     document.body.removeEventListener('keydown', closeEventsHandler);
   }
   function closeEventsHandler (evt) {
@@ -20,22 +20,22 @@ const showSuccessAlert = () => {
     }
   }
   document.body.addEventListener('click', (evt) => {
-    if (evt.target !== successInner && !successInner.contains(evt.target)) {
+    if (evt.target !== successInnerEl && !successInnerEl.contains(evt.target)) {
       removeMessageHandler();
     }
   });
 };
 const showErrorAlert = () => {
-  const errorTemplate = document.querySelector('#error').content;
-  const errorElement = errorTemplate.cloneNode(true);
+  const errorTemplateEl = document.querySelector('#error').content;
+  const errorElement = errorTemplateEl.cloneNode(true);
   document.body.append(errorElement);
-  const errorMessage = document.querySelector('.error');
-  const errorInner = document.querySelector('.error__inner');
+  const errorMessageEl = document.querySelector('.error');
+  const errorInnerEl = document.querySelector('.error__inner');
   document.querySelector('.error__button').addEventListener('click', removeMessageHandler);
   document.body.addEventListener('keydown', closeEventsHandler);
   document.body.addEventListener('click', closeEventsHandler);
   function removeMessageHandler () {
-    errorMessage.remove();
+    errorMessageEl.remove();
     document.body.removeEventListener('keydown', closeEventsHandler);
   }
   function closeEventsHandler (evt) {
@@ -45,18 +45,18 @@ const showErrorAlert = () => {
     }
   }
   document.body.addEventListener('click', (evt) => {
-    if (evt.target !== errorInner && !errorInner.contains(evt.target)) {
+    if (evt.target !== errorInnerEl && !errorInnerEl.contains(evt.target)) {
       removeMessageHandler();
     }
   });
 };
 const showDataError = () => {
-  const dataErrorTemplate = document.querySelector('#data-error').content;
-  const dataErrorElement = dataErrorTemplate.cloneNode(true);
+  const dataErrorTemplateEl = document.querySelector('#data-error').content;
+  const dataErrorElement = dataErrorTemplateEl.cloneNode(true);
   document.body.append(dataErrorElement);
-  const dataErrorMessage = document.querySelector('.data-error');
+  const dataErrorMessageEl = document.querySelector('.data-error');
   setTimeout(() => {
-    dataErrorMessage.remove();
+    dataErrorMessageEl.remove();
   }, ALERT_SHOW_TIME);
 };
 
