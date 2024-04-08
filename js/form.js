@@ -11,25 +11,25 @@ const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'
 };
-const uploadForm = document.querySelector('.img-upload__form');
-const fileInput = document.querySelector('.img-upload__input');
-const overlay = document.querySelector('.img-upload__overlay');
-const closeButton = document.querySelector('.img-upload__cancel');
-const hashtagInput = document.querySelector('.text__hashtags');
-const descriptionInput = document.querySelector('.text__description');
-const submitButton = document.querySelector('.img-upload__submit');
-const pristine = new Pristine(uploadForm, {
+const uploadFormEl = document.querySelector('.img-upload__form');
+const fileInputEl = document.querySelector('.img-upload__input');
+const overlayEl = document.querySelector('.img-upload__overlay');
+const closeButtonEl = document.querySelector('.img-upload__cancel');
+const hashtagInputEl = document.querySelector('.text__hashtags');
+const descriptionInputEl = document.querySelector('.text__description');
+const submitButtonEl = document.querySelector('.img-upload__submit');
+const pristine = new Pristine(uploadFormEl, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = SubmitButtonText.SENDING;
+  submitButtonEl.disabled = true;
+  submitButtonEl.textContent = SubmitButtonText.SENDING;
 };
 const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = SubmitButtonText.IDLE;
+  submitButtonEl.disabled = false;
+  submitButtonEl.textContent = SubmitButtonText.IDLE;
 };
 const onSubmitForm = (evt) => { // Функция для отправки формы
   evt.preventDefault();
@@ -54,9 +54,9 @@ const onEscapeEvent = (evt) => { // Функция для закрытия фо�
   }
 };
 const showUploadFormHandler = () => { // Функция для отображения формы загрузки
-  overlay.classList.remove('hidden');
+  overlayEl.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  const file = fileInput.files[0];
+  const file = fileInputEl.files[0];
   handleFileChange(file);
   resetScale();
   updateScale(DEFAULT_SCALE);
@@ -90,31 +90,31 @@ const checkDuplicateHashtags = (hashtags) => { // Проверка дублик�
 const validateComment = (comment) => comment.length <= MAX_COMMENT_LENGTH; // Функция настроек валидации комментария
 function hideUploadFormHandler() { // Функция скрытия формы загрузки
   pristine.reset();
-  uploadForm.reset();
-  overlay.classList.add('hidden');
+  uploadFormEl.reset();
+  overlayEl.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscapeEvent);
 }
 const formValidations = [
-  [hashtagInput, setupHashtagRegex, 'Введён невалидный хэштег'],
-  [hashtagInput, checkHashtagsCount, 'Не более 5 хештегов'],
-  [hashtagInput, checkDuplicateHashtags , 'Хештеги не должны повторяться'],
-  [descriptionInput, validateComment, 'Длина комментария больше 140 символов'],
+  [hashtagInputEl, setupHashtagRegex, 'Введён невалидный хэштег'],
+  [hashtagInputEl, checkHashtagsCount, 'Не более 5 хештегов'],
+  [hashtagInputEl, checkDuplicateHashtags , 'Хештеги не должны повторяться'],
+  [descriptionInputEl, validateComment, 'Длина комментария больше 140 символов'],
 ];
 const configureFormValidation = () => { // Функция конфигурации проверки формы
-  uploadForm.addEventListener('submit', onSubmitForm);
-  closeButton.addEventListener('click', hideUploadFormHandler);
-  descriptionInput.addEventListener('keydown', (evt) => {
+  uploadFormEl.addEventListener('submit', onSubmitForm);
+  closeButtonEl.addEventListener('click', hideUploadFormHandler);
+  descriptionInputEl.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
       evt.stopPropagation();
     }
   });
-  hashtagInput.addEventListener('keydown', (evt) => {
+  hashtagInputEl.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
       evt.stopPropagation();
     }
   });
-  fileInput.addEventListener('change', showUploadFormHandler);
+  fileInputEl.addEventListener('change', showUploadFormHandler);
   formValidations.forEach(([element, validation, errorText]) => pristine.addValidator(element, validation, errorText));
 };
 

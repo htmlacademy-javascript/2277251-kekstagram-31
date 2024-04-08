@@ -1,8 +1,8 @@
-const uploadedImage = document.querySelector('.img-upload__preview img');
-const effectLevel = document.querySelector('.img-upload__effect-level');
-const effectValue = document.querySelector('.effect-level__value');
-const effectSlider = document.querySelector('.effect-level__slider');
-const effectsList = document.querySelector('.effects__list');
+const uploadedImageEl = document.querySelector('.img-upload__preview img');
+const effectLevelEl = document.querySelector('.img-upload__effect-level');
+const effectValueEl = document.querySelector('.effect-level__value');
+const effectSliderEl = document.querySelector('.effect-level__slider');
+const effectsListEl = document.querySelector('.effects__list');
 const effects = {
   chrome: {filter: 'grayscale', min: 0, max: 1, start: 1, step: 0.1},
   sepia: {filter: 'sepia', min: 0, max: 1, start: 1, step: 0.1},
@@ -10,7 +10,7 @@ const effects = {
   phobos: {filter: 'blur', min: 0, max: 3, start: 3, step: 0.1, units: 'px'},
   heat: {filter: 'brightness', min: 1, max: 3, start: 3, step: 0.1}
 };
-noUiSlider.create(effectSlider, { // Инициализируем слайдер
+noUiSlider.create(effectSliderEl, { // Инициализируем слайдер
   range: {
     min: 0,
     max: 1
@@ -23,20 +23,20 @@ noUiSlider.create(effectSlider, { // Инициализируем слайдер
     from: (value) => parseFloat(value)
   }
 });
-effectSlider.noUiSlider.on('update', () => { // Обновляем значение при смене ползунка
-  effectValue.value = effectSlider.noUiSlider.get();
+effectSliderEl.noUiSlider.on('update', () => { // Обновляем значение при смене ползунка
+  effectValueEl.value = effectSliderEl.noUiSlider.get();
 });
 const undoEffects = () => { // Сброс стиля изображения
-  uploadedImage.removeAttribute('style');
-  effectLevel.classList.add('hidden');
+  uploadedImageEl.removeAttribute('style');
+  effectLevelEl.classList.add('hidden');
 };
 const setImageStyle = (effect) => { // Применяем эффект к изображению
   if (effect === 'none') {
     undoEffects();
   } else {
     const {filter, min, max, start, step, units} = effects[effect]; // Получаем свойства эффекта
-    effectLevel.classList.remove('hidden');
-    effectSlider.noUiSlider.updateOptions({ // Обновляем параметры слайдера
+    effectLevelEl.classList.remove('hidden');
+    effectSliderEl.noUiSlider.updateOptions({ // Обновляем параметры слайдера
       range: {
         min,
         max
@@ -45,21 +45,21 @@ const setImageStyle = (effect) => { // Применяем эффект к изо
       step,
       connect: 'lower'
     });
-    effectSlider.noUiSlider.on('update', () => { // Применяем фильтр при изменении эффекта
-      uploadedImage.style.filter = `${filter}(${effectValue.value}${units ?? ''})`;
+    effectSliderEl.noUiSlider.on('update', () => { // Применяем фильтр при изменении эффекта
+      uploadedImageEl.style.filter = `${filter}(${effectValueEl.value}${units ?? ''})`;
     });
   }
 };
 const selectImageEffectHandler = (evt) => { // Обработка выбора эффекта
-  const selectedInput = evt.target.closest('.effects__radio'); // Находим выбранный элемент радиокнопки
-  if (selectedInput) {
-    const selectedEffect = selectedInput.value;
+  const selectedInputEl = evt.target.closest('.effects__radio'); // Находим выбранный элемент радиокнопки
+  if (selectedInputEl) {
+    const selectedEffect = selectedInputEl.value;
     setImageStyle(selectedEffect);
   }
 };
 const setupEffects = () => { // Инициализируем эффекты
   undoEffects();
-  effectsList.addEventListener('change', selectImageEffectHandler);
+  effectsListEl.addEventListener('change', selectImageEffectHandler);
 };
 
-export {setupEffects, uploadedImage};
+export {setupEffects, uploadedImageEl};
